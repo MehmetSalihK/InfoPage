@@ -2,22 +2,23 @@
 
 import React, { useState } from "react";
 import Modal from "react-modal";
-import "./styles/App.css";
-import { TwitchEmbed } from "react-twitch-embed";
+import "./styles/App.css"; // Importation de votre fichier CSS
 
 import InstagramFeed from "./components/InstagramFeed";
 import TwitterFeed from "./components/TwitterFeed";
 
+
+// Assurez-vous que le portail modal est attaché à un élément racine de l'application React
 Modal.setAppElement("#root");
 
 const App: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState("");
   const platformLinks: { [key: string]: string } = {
-    Instagram: "", // Lien pour Instagram
+    Instagram: "https://www.instagram.com/sketur60/media/", // Lien pour Instagram
     YouTube: "https://www.youtube.com/@parisdekibebeg480",
     Kick: "https://player.kick.com/parisdekibebeg?autoplay=true", // Lien pour la plateforme Kick
-    Twitch: "", // Laissez ce lien vide, nous allons l'ajouter dynamiquement
+    Twitch: "https://player.twitch.tv/?channel=parisdekibebegg&parent=streamernews.example.com&muted=true",
     Twitter: "https://twitter.com/sketur60",
     Paypal: "",
   };
@@ -62,34 +63,20 @@ const App: React.FC = () => {
         overlayClassName="overlay"
       >
         <div className="modal-content">
-          <h2>Page {selectedPlatform}
-          <button onClick={closeModal} className="close-button">
-            <i className="fas fa-times"></i>{/* Icône X */}
-          </button>
-          </h2>
-
-          {/* Instagram */}
-          {selectedPlatform === "Instagram" && <InstagramFeed />}
-          
-          {/* Twitter */}
-          {selectedPlatform === "Twitter" && <TwitterFeed />}
-          
-          {/* Twitch */}
-          {selectedPlatform === "Twitch" && (
-            <TwitchEmbed
-            channel="parisdekibebegg"
-            parent={["parisdekibebeg.tr"]}
-            autoplay={false}
-            muted={true}
-          />
-          )}
-          {platformLinks[selectedPlatform] && selectedPlatform !== "Twitch" && (
+          <h2>Page {selectedPlatform}</h2>
+          {selectedPlatform === "Instagram" && <InstagramFeed />} {/* Affiche InstagramFeed seulement si le bouton Instagram est cliqué */}
+          {selectedPlatform === "Twitter" && <TwitterFeed />} {/* Affiche TwitterFeed seulement si le bouton Twitter est cliqué */}
+          {platformLinks[selectedPlatform] && selectedPlatform !== "Instagram" && selectedPlatform !== "Twitter" && (
             <iframe
               title={selectedPlatform}
               src={platformLinks[selectedPlatform]}
-              style={{ width: "960px", height: "580px" }}
+              frameBorder="0"
+              style={{ width: "960px", height: "540px" }} // Hauteur et largeur spécifiées
             ></iframe>
           )}
+          <button onClick={closeModal} className="close-button">
+            <i className="fas fa-times"></i> {/* Icône X */}
+          </button>
         </div>
       </Modal>
     </div>
