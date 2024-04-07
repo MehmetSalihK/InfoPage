@@ -1,0 +1,41 @@
+.instagram-feed {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .instagram-post {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .instagram-post img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  
+  .instagram-post video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  
+  .instagram-post a {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .instagram-post a:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
